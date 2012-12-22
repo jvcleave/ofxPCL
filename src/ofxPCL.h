@@ -244,8 +244,8 @@ void movingLeastSquares(const T1 &cloud, T2 &output_cloud_with_normals, float se
 	mls.setSearchRadius(search_radius);
 
 	// Reconstruct
-	mls.setOutputNormals(mls_normals);
-	mls.reconstruct(mls_points);
+	//mls.setOutputNormals(mls_normals);
+	mls.process(mls_points);
 
 	output_cloud_with_normals = T2(new typename T2::value_type);
 	pcl::concatenateFields(mls_points, *mls_normals, *output_cloud_with_normals);
@@ -316,7 +316,7 @@ ofMesh gridProjection(const T &cloud_with_normals, float resolution = 1, int pad
 
 	// Get result
 	gp.setInputCloud(cloud_with_normals);
-	gp.setSearchMethod(tree);
+	//gp.setSearchMethod(tree);
 	gp.reconstruct(triangles);
 
 	convert(cloud_with_normals, mesh);
